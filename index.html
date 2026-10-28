@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Emely Benjamin – Portfolio</title>
+  <meta name="description" content="Portfolio of p5.js sketches and other projects." />
+  <style>
+    :root{
+      --bg:#8A1C0E;--card:#8A0E3E;--ink:#ffffff;--muted:#b0b8c3;--pop:#ffffff;--accent:#FFE5F3;
+      --radius:18px;--shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:linear-gradient(180deg,#8A0E3E 0%, #8A1C0E 100%);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+    a{color:var(--pop);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px}
+    header{display:grid;gap:12px;align-items:center;grid-template-columns:auto 1fr auto;flex-wrap:wrap}
+    .avatar{width:70px;height:70px;border-radius:50%;border:2px solid rgba(255,255,255,.08);box-shadow:var(--shadow);object-fit:cover}
+    .title h1{font-size:28px;margin:0}
+    .title p{margin:2px 0 0;color:var(--muted)}
+    .links a{display:inline-block;margin-left:10px;padding:8px 12px;border-radius:999px;background:#8A1C0E;border:1px solid rgba(255,255,255,.06)}
+    .hero{margin:28px 0;padding:20px 22px;border-radius:var(--radius);background:radial-gradient(80% 100% at 0% 0%, rgba(109,214,255,.15), transparent 60%), radial-gradient(80% 120% at 100% 0%, rgba(155,255,175,.12), transparent 60%), var(--card);box-shadow:var(--shadow)}
+    .hero h2{margin:0 0 6px;font-size:24px}
+    .hero p{margin:0;color:var(--muted)}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0}
+    .tab{padding:8px 12px;border-radius:999px;background:#8A1C0E;border:1px solid rgba(255,255,255,.06);cursor:pointer;color:var(--muted)}
+    .tab.active{background:linear-gradient(90deg, rgba(109,214,255,.2), rgba(155,255,175,.18));color:var(--ink);border-color:rgba(255,255,255,.14)}
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .thumb{position:relative;aspect-ratio:16/10;background:#0e1319;display:flex;align-items:center;justify-content:center}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .thumb iframe{width:100%;height:100%;border:0}
+    .badge{position:absolute;top:10px;left:10px;padding:6px 10px;border-radius:999px;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.1);font-size:12px}
+    .body{padding:14px 14px 18px}
+    .body h3{margin:0 0 6px;font-size:18px}
+    .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+    .tag{font-size:12px;color:var(--muted);padding:4px 8px;border:1px solid rgba(255,255,255,.08);border-radius:999px}
+    .meta{margin-top:10px;color:var(--muted);font-size:14px}
+    footer{margin:36px 0 14px;color:var(--muted);text-align:center}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <img class="avatar" src="download.jpeg" alt="avatar"/>
+      <div class="title">
+        <h1>Emely</h1>
+        <p>Designer • Developer • Student — showcasing p5.js sketches and other works</p>
+      </div>
+      <nav class="links" aria-label="social links">
+        <a href="https://github.com/emzbenzz">GitHub</a>
+        <a href="https://www.linkedin.com/in/emelybenjamin/">LinkedIn</a>
+      </nav>
+    </header>
+
+     <section class="hero">
+      <h2>Hi there! My name is Emely and I make fun, interactive projects. I enjoy using different interactive platforms like Twine, Bitsy, and p5.js. Currently, I am in the Digital Media MA program at UCF.</h2>
+      <p>Below are my p5.js experiments and other projects that I have created. Check them out!</p>
+    </section>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-filter="all">All</button>
+      <button class="tab" data-filter="p5">p5.js</button>
+      <button class="tab" data-filter="other">Other</button>
+    </div>
+
+    <section class="grid" id="grid" aria-live="polite"></section>
+
+    <footer>© <span id="y"></span> Emely • Built with HTML/CSS/JS • Hosted on GitHub Pages</footer>
+  </div>
+
+<script>
+const PROJECTS = [
+  {
+    title: "UFO",
+    type: "p5",
+    embed: "https://editor.p5js.org/emelybenj/full/DbgQRNMFJ",
+    thumb: "ufo.jpg",
+    desc: "Can you escape the UFO?",
+    tags: ["p5.js"]
+  },
+  {
+    title: "Window",
+    type: "p5",
+    embed: "https://editor.p5js.org/emelybenj/full/L_tMgZztH",
+    thumb: "window.jpg",
+    desc: "Just a weird little window.",
+    tags: ["p5.js", "game"]
+  },
+  {
+    title: "Bagel",
+    type: "p5",
+    embed: "https://editor.p5js.org/emelybenj/full/EgIcEHo5M",
+    thumb: "bagel.jpg",
+    desc: "Everything to me.",
+    tags: ["p5.js", "animation"]
+  },
+  {
+    title: "Sweet Dreams: The Christmas Chronicles",
+    type: "other",
+    link: "https://emelybenj.itch.io/sweet-dreams-the-christmas-chronicles",
+    thumb: "visual.jpg",
+    desc: "Christmas-themed visual novel.",
+    tags: ["twine", "other"]
+  },
+  {
+    title: "Billy's Bakery Run",
+    type: "other",
+    link: "https://emelybenj.itch.io/billys-biscuit-run",
+    thumb: "billy.jpg",
+    desc: "A silly little Bitsy game.",
+    tags: ["bitsy", "other"]
+  }
+];
+
+const grid = document.getElementById('grid');
+const tabs = document.querySelectorAll('.tab');
+document.getElementById('y').textContent = new Date().getFullYear();
+let currentFilter = 'all';
+
+function card(project){
+  const isP5 = project.type === 'p5';
+  const el = document.createElement('article');
+  el.className = 'card';
+
+  const thumb = document.createElement('div');
+  thumb.className = 'thumb';
+
+  const badge = document.createElement('span');
+  badge.className = 'badge';
+  badge.textContent = isP5 ? "p5.js" : "Project";
+  thumb.appendChild(badge);
+
+  // Use your local repo images ✔
+  const img = document.createElement('img');
+  img.src = project.thumb;
+  img.alt = project.title;
+  thumb.appendChild(img);
+
+  thumb.style.cursor = "pointer";
+  thumb.title = "Click to load / view";
+
+  // For p5 — click loads iframe
+  if(isP5){
+    thumb.addEventListener("click", () => {
+      window.open(project.embed, "_blank");
+    });
+  } else {
+    thumb.addEventListener("click", () => {
+      window.open(project.link, "_blank");
+    });
+  }
+
+  const body = document.createElement("div");
+  body.className = "body";
+
+  const h3 = document.createElement("h3");
+  h3.textContent = project.title;
+  body.appendChild(h3);
+
+  const meta = document.createElement("div");
+  meta.className = "meta";
+  meta.textContent = project.desc;
+  body.appendChild(meta);
+
+  if(project.tags){
+    const tags = document.createElement("div");
+    tags.className = "tags";
+    project.tags.forEach(t => {
+      const span = document.createElement("span");
+      span.className = "tag";
+      span.textContent = t;
+      tags.appendChild(span);
+    });
+    body.appendChild(tags);
+  }
+
+  el.appendChild(thumb);
+  el.appendChild(body);
+
+  return el;
+}
+
+function render(){
+  grid.innerHTML = "";
+  PROJECTS
+    .filter(p => currentFilter === "all" || p.type === currentFilter)
+    .forEach(p => grid.appendChild(card(p)));
+}
+
+render();
+
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    tabs.forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    currentFilter = tab.dataset.filter;
+    render();
+  });
+});
+</script>
+
+</body>
+</html>
