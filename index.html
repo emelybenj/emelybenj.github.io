@@ -142,6 +142,8 @@ let currentFilter = 'all';
 
 function card(project){
   const isP5 = project.type === 'p5';
+  const istwine = project.type === 'twine';
+  const isbitsy = project.type === 'bitsy';
   const el = document.createElement('article');
   el.className = 'card';
 
