@@ -150,12 +150,21 @@ function card(project){
   const thumb = document.createElement('div');
   thumb.className = 'thumb';
 
-  const badge = document.createElement('span');
-  badge.className = 'badge';
-  badge.textContent = isP5 ? "p5.js" : "p5.js";
-  badge.textContent = istwine ? "twine" : "twine";
-  badge.textContent = isbitsy ? "bitsy" : "bitsy";
-  thumb.appendChild(badge);
+  
+const badge = document.createElement('span');
+badge.className = 'badge';
+
+badge.textContent = isP5
+  ? 'p5.js'
+  : istwine
+  ? 'twine'
+  : isbitsy
+  ? 'bitsy'
+  : 'other';
+
+thumb.appendChild(badge);
+
+
 
   // Use your local repo images ✔
   const img = document.createElement('img');
